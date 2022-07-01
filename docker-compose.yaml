@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+
+  minio:
+    container_name: minio
+    image: minio/minio:RELEASE.2022-06-25T15-50-16Z
+    volumes:
+      - minio-storage:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    env_file:
+      - ./.env
+    command: server --console-address ":9001" /data/
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  db:
+    container_name: db
+    image: postgres:14.4-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdb:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+
+  web:
+    container_name: web
+    build: .
+    restart: always
+    ports:
+     - "80:80"
+    depends_on:
+      - db
+      - minio
+    env_file:
+      - ./.env
+
+volumes:
+  minio-storage:
+  pgdb:
