@@ -19,15 +19,17 @@
 ### Как запустить проект:
 - Склонируйте репозиторий на свой компьютер
 - Создайте `.env` файл в корневой директории, рядом с файлом `docker-compose.yaml`. В `.env` файле должны содержаться следующие переменные:
-    >MINIO_URL='minio:9000' # имя хоста (контейнера) и порт для доступа к объектному хранилищу
-    >MINIO_ACCESS_KEY=admin # имя пользователя для доступа к объектному хранилищу
-    >MINIO_SECRET_KEY=minio123 #пароль для доступа к объектному хранилищу
-    >DATABASE_NAME=postgres # название БД\ 
-    >POSTGRES_USER=postgres # имя пользователя для доступа к БД
-    >POSTGRES_PASSWORD=postgres123 # пароль для доступа к БД
-    >DATABASE_HOST=db # имя хоста (контейнера) для подключения к БД
-    >DATABASE_PORT=5432 # порт для подключения к БД
-    >DATABASE_URL="postgresql://postgres:postgres123@db/postgres" # url подключения к БД
+```
+MINIO_URL='minio:9000' # имя хоста (контейнера) и порт для доступа к объектному хранилищу
+MINIO_ACCESS_KEY=admin # имя пользователя для доступа к объектному хранилищу
+MINIO_SECRET_KEY=minio123 #пароль для доступа к объектному хранилищу
+DATABASE_NAME=postgres # название БД\ 
+POSTGRES_USER=postgres # имя пользователя для доступа к БД
+POSTGRES_PASSWORD=postgres123 # пароль для доступа к БД
+DATABASE_HOST=db # имя хоста (контейнера) для подключения к БД
+DATABASE_PORT=5432 # порт для подключения к БД
+DATABASE_URL='postgresql://postgres:postgres123@db/postgres' # url подключения к БД
+```
 - Из корня проекта соберите образ при помощи docker-compose
 `$ docker-compose up -d --build`
 
